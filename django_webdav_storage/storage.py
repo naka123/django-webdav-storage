@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 import requests
 from django.conf import settings
@@ -75,6 +76,7 @@ class WebDavStorage(StorageBase):
 
     def _save(self, name, content):
         headers = None
+        name = str(Path(name).as_posix())
 
         if setting('WEBDAV_RECURSIVE_MKCOL', False):
             self.make_collection(name)
